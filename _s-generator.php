@@ -304,10 +304,10 @@ class Underscores_Generator_Plugin {
 		$slug = str_replace( '-', '_', $this->theme['slug'] );
 
 		// Regular treatment for all other files.
-		$contents = str_replace( "@package _s", sprintf( "@package %s", str_replace( ' ', '_', $this->theme['name'] ) ), $contents ); // Package declaration.
-		$contents = str_replace( "_s-", sprintf( "%s-",  $this->theme['slug'] ), $contents ); // Script/style handles.
+		$contents = str_replace( '@package _s', sprintf( '@package %s', str_replace( ' ', '_', $this->theme['name'] ) ), $contents ); // Package declaration.
+		$contents = str_replace( '_s-', sprintf( '%s-',  $this->theme['slug'] ), $contents ); // Script/style handles.
 		$contents = str_replace( "'_s'", sprintf( "'%s'",  $this->theme['slug'] ), $contents ); // Textdomains.
-		$contents = str_replace( "_s_", $slug . '_', $contents ); // Function names.
+		$contents = str_replace( '_s_', $slug . '_', $contents ); // Function names.
 		$contents = preg_replace( '/\b_s\b/', $this->theme['name'], $contents );
 		return $contents;
 	}
@@ -332,11 +332,19 @@ class Underscores_Generator_Plugin {
 			$features[] = 'none';
 		}
 
-		wp_remote_get( add_query_arg( array(
-			'v'                         => 'wpcom-no-pv',
-			'x_underscoresme-downloads' => $user_agent,
-			'x_underscoresme-features'  => implode( ',', $features ),
-		), 'http://stats.wordpress.com/g.gif' ), array( 'blocking' => false ) );
+		wp_remote_get(
+			add_query_arg(
+				array(
+					'v'                         => 'wpcom-no-pv',
+					'x_underscoresme-downloads' => $user_agent,
+					'x_underscoresme-features'  => implode( ',', $features ),
+				),
+				'http://stats.wordpress.com/g.gif'
+			),
+			array(
+				'blocking' => false,
+			)
+		);
 	}
 }
 new Underscores_Generator_Plugin;
