@@ -44,6 +44,15 @@ class Underscores_Generator_Plugin {
 	}
 
 	function underscoresme_print_form() {
+		$current_user = wp_get_current_user();
+		$author_name = '';
+		$author_uri = '';
+		if ( isset( $current_user->user_firstname ) ||  isset( $current_user->user_lastname ) ) {
+			$author_name = $current_user->user_firstname . ' ' . $current_user->user_lastname;
+		}
+		if ( isset( $current_user->user_url ) ) {
+			$author_uri = $current_user->user_url;
+		}
 		?>
 		<div class="wrap">
 			<h1>Underscores Generator</h1>
@@ -53,10 +62,6 @@ class Underscores_Generator_Plugin {
 			<div id="generator-form" class="generator-form-skinny">
 				<form method="POST">
 					<input type="hidden" name="underscoresme_generate" value="1" />
-
-					<?php if ( isset( $_REQUEST['can_i_haz_wpcom'] ) ) : ?>
-						<input type="hidden" name="can_i_haz_wpcom" value="1" />
-					<?php endif; ?>
 
 					<table class="form-table">
 						<tbody>
@@ -89,7 +94,7 @@ class Underscores_Generator_Plugin {
 									<label for="underscoresme-slug">Author</label>
 								</th>
 								<td>
-									<input type="text" class="regular-text" id="underscoresme-author" name="underscoresme_author" placeholder="Author" />
+									<input type="text" class="regular-text" id="underscoresme-author" name="underscoresme_author" placeholder="Author" value="<?php echo $author_name; ?>" />
 								</td>
 							</tr>
 							<tr>
@@ -97,7 +102,7 @@ class Underscores_Generator_Plugin {
 									<label for="underscoresme-author-uri">Author URI</label>
 								</th>
 								<td>
-									<input type="text" class="regular-text" id="underscoresme-author-uri" name="underscoresme_author_uri" placeholder="Author URI" />
+									<input type="text" class="regular-text" id="underscoresme-author-uri" name="underscoresme_author_uri" placeholder="Author URI" value="<?php echo $author_uri; ?>" />
 								</td>
 							</tr>
 							<tr>
