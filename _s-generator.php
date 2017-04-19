@@ -3,7 +3,7 @@
  * Plugin Name:         _s Generator
  * Plugin URI:          https://github.com/josephfusco/_s-generator
  * Description:         Generates themes based on the _s theme.
- * Version:             1.0
+ * Version:             1.1
  * Author:              Joseph Fusco
  * Author URI:          https://josephfus.co
  * License:             GPLv2 or later
